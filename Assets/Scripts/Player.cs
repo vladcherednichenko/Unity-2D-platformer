@@ -39,6 +39,11 @@ public class Player : Character {
     [SerializeField]
     private PolygonCollider2D swordCollider;
 
+    public Stats stats;
+
+    [SerializeField]
+    public int stars;
+
     private Vector2 spawn;
 
     private float xspeed;
@@ -89,6 +94,9 @@ public class Player : Character {
     void FixedUpdate()
     {
 
+        stats.Health = health;
+        stats.Stars = stars;
+
         if (!IsDead)
         {
             //проверь, нужно ли это присваивание
@@ -106,6 +114,8 @@ public class Player : Character {
 
             handleLayers();
 
+           
+
         }
 
     }
@@ -119,9 +129,25 @@ public class Player : Character {
     {
         base.OnTriggerEnter2D(other);
 
-        if (other.gameObject.name == "DieCollider")
+        if (other.gameObject.tag == "DieCollider")
         {
-            transform.position = spawn;
+            health = 0;
+            CharacterAnimator.SetLayerWeight(1, 0);
+            CharacterAnimator.SetTrigger("die");
+
+            //transform.position = spawn;
+        }
+        if (other.gameObject.tag == "Diamond")
+        {
+            PlayerDataCtrl.Entity.AddStar();
+            stars += 1;
+        }
+
+        if (other.gameObject.tag == "Chest")
+        {
+            PlayerDataCtrl.Entity.Save();
+            stats.ChestFound = true;
+
         }
 
     }
@@ -150,8 +176,9 @@ public class Player : Character {
             CharacterAnimator.SetTrigger("dodge");
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log(OnGround);
             CharacterAnimator.SetTrigger("jump");
 
         }
@@ -161,7 +188,9 @@ public class Player : Character {
     private void handleMovement(float xspeed)
     {
 
-        if (PlayerRigidBody.velocity.y < 0 )
+        //0.2 instead 0 because character would run 
+        //falling animation on the uneven surfaces
+        if (PlayerRigidBody.velocity.y < -4.5 )
         {
             CharacterAnimator.SetBool("land", true);
         }
@@ -181,6 +210,7 @@ public class Player : Character {
 
     private void handleLayers()
     {
+
         if (!OnGround)
         {
             CharacterAnimator.SetLayerWeight(1, 1);
@@ -254,20 +284,5 @@ public class Player : Character {
 
         }
         yield return null;
-    }
-
-    void OnGUI()
-    {
-        if (IsDead)
-            GUI.TextField(new Rect(300, 100, 100, 50), "you loose");
-
-
-
-        GUI.TextField(new Rect(0,0, 119, 100), "Enemies left: " + (EnemyAmount - EnemyKilled) + "\n " + " F - shoot" + "\n" + "  R - attack");
-
-        if (EnemyAmount - EnemyKilled == 0)
-        {
-            GUI.TextField(new Rect(300, 100, 100, 100), "you win");
-        }
     }
 }

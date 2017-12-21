@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4585282021241696}
   - component: {fileID: 212982773438406944}
   - component: {fileID: 114146596220191610}
-  - component: {fileID: 61457091473600408}
   m_Layer: 0
   m_Name: hollow13
   m_TagString: Untagged
@@ -42,31 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61457091473600408
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1682059586020634}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.3309453, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1.28, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.61810935, y: 1.28}
-  m_EdgeRadius: 0
 --- !u!114 &114146596220191610
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,6 +9,9 @@ TagManager:
   - Sword
   - ZombieHands
   - Text
+  - DieCollider
+  - Diamond
+  - Chest
   layers:
   - Default
   - TransparentFX

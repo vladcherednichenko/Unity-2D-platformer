@@ -41,7 +41,9 @@ public class AttackState : IEnemyState
     {
         if (other.tag == "Edge")
         {
-            thisEnemy.ChangeState(new IdleState());
+            thisEnemy.changeDirection();
+            thisEnemy.Target = null;
+            thisEnemy.ChangeState(new PatrolState());
 
         }
     }
